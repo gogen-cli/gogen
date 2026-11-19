@@ -159,6 +159,34 @@ gogen follows a clean, modular structure:
 
 Each resource is self-contained under its own directory, supporting maintainable and testable code organization.
 
+## Framework Comparison
+
+Both frameworks get the same four-layer structure (routes → controllers → services → repositories). What differs is how each layer talks to the framework: Fiber handlers **return an `error`**, while Gin handlers **return nothing** and work through the request context.
+
+### Internal Layer Mappings
+
+| Layer | Generated file | Fiber | Gin |
+|-------|----------------|-------|-----|
+| Routes | `routes/<name>_routes.go` | `func UserRoutes(router fiber.Router)` | `func UserRoutes(router *gin.RouterGroup)` |
+| Controllers | `controllers/<name>_controller.go` | `func GetUser(c *fiber.Ctx) error` — returns `services.GetUser(c)` | `func GetUser(c *gin.Context)` — calls `services.GetUser(c)` |
+| Services | `services/<name>_service.go` | `func GetUser(c *fiber.Ctx) error` — returns `repositories.GetUser(c)` | `func GetUser(c *gin.Context)` — calls `repositories.GetUser(c)` |
+| Repositories | `repositories/<name>_repository.go` | `func GetUser(c *fiber.Ctx) error` — `return c.SendString("Hello World")` | `func GetUser(c *gin.Context)` — `c.String(http.StatusOK, "Hello World")` |
+
+### Feature Comparison
+
+| Feature | Fiber | Gin |
+|---------|-------|-----|
+| Import path | `github.com/gofiber/fiber/v2` | `github.com/gin-gonic/gin` |
+| Context type | `*fiber.Ctx` | `*gin.Context` |
+| Handler signature | `func(c *fiber.Ctx) error` | `func(c *gin.Context)` |
+| Error handling | Handlers return `error`; each layer propagates it up to Fiber's error handler | No return value; errors are written to the response through the context (e.g. `c.JSON`, `c.AbortWithError`) |
+| Sending a response | `return c.SendString(...)` | `c.String(http.StatusOK, ...)` (extra `net/http` import) |
+| Router type | `fiber.Router` | `*gin.RouterGroup` |
+| Route grouping | `router.Group("/users")` | `router.Group("/users")` wrapped in a `{ ... }` block |
+| HTTP method helpers | `Get`, `Post`, `Put`, `Delete` | `GET`, `POST`, `PUT`, `DELETE` |
+| Route params | `/:id` | `/:id` |
+| Generated endpoints | `GET /`, `GET /:id`, `POST /`, `PUT /:id`, `DELETE /:id` | Same |
+
 ## Contributing
 
 We welcome thoughtful contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for detailed information on:
