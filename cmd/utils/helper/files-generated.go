@@ -4,6 +4,7 @@ import (
 	"os"
 
 	fiberContent "github.com/zaheershaikh936/gogen/cmd/utils/content/fiber"
+	echoContent "github.com/zaheershaikh936/gogen/cmd/utils/content/echo"
 	ginContent "github.com/zaheershaikh936/gogen/cmd/utils/content/gin"
 )
 
@@ -31,6 +32,8 @@ func RoutesGenerated(model string, output string, framework string) []string {
     var routes_content string
     if framework == "gin" {
         routes_content = ginContent.RoutesContent(model, output, moduleName)
+    } else if framework == "echo" {
+        routes_content = echoContent.RoutesContent(model, output, moduleName)
     } else {
         routes_content = fiberContent.RoutesContent(model, output, moduleName)
     }
@@ -42,6 +45,8 @@ func ControllerGenerated(model string, output string, framework string) []string
     var controller_content string
     if framework == "gin" {
         controller_content = ginContent.ControllerContent(model, output, moduleName)
+    } else if framework == "echo" {
+        controller_content = echoContent.ControllerContent(model, output, moduleName)
     } else {
         controller_content = fiberContent.ControllerContent(model, output, moduleName)
     }
@@ -53,6 +58,8 @@ func ServiceGenerated(model string, output string, framework string) []string {
     var service_content string
     if framework == "gin" {
         service_content = ginContent.ServiceContent(model, output, moduleName)
+    } else if framework == "echo" {
+        service_content = echoContent.ServiceContent(model, output, moduleName)
     } else {
         service_content = fiberContent.ServiceContent(model, output, moduleName)
     }
@@ -64,6 +71,8 @@ func RepositoryGenerated(model string, output string, framework string) []string
     var repository_content string
     if framework == "gin" {
         repository_content = ginContent.RepositoryContent(model, output, moduleName)
+    } else if framework == "echo" {
+        repository_content = echoContent.RepositoryContent(model, output, moduleName)
     } else {
         repository_content = fiberContent.RepositoryContent(model, output, moduleName)
     }

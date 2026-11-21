@@ -64,6 +64,7 @@ var Resource = &cobra.Command{
 					Options(
 						huh.NewOption("Fiber", "fiber"),
 						huh.NewOption("Gin", "gin"),
+						huh.NewOption("Echo", "echo"),
 					).
 					Value(&framework),
 			),
