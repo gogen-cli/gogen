@@ -8,17 +8,17 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/zaheershaikh936/gogen?style=flat-square)](https://goreportcard.com/report/github.com/zaheershaikh936/gogen)
 
 
-> A powerful CLI tool to generate complete CRUD resources for **Go Fiber** and **Gin** frameworks with a premium TUI experience and idiomatic naming 💎
+> A powerful CLI tool to generate complete CRUD resources for **Go Fiber**, **Gin** and **Echo** frameworks with a premium TUI experience and idiomatic naming 💎
 
 Stop writing repetitive boilerplate code! Gogen generates production-ready CRUD APIs with models, controllers, services, repositories, and routes—all in one command.
 
 # gogen
 
-A command-line tool for generating CRUD resource scaffolding for **Go Fiber** and **Gin** web frameworks. gogen automates the creation of controllers, services, repositories, and routes, following clean architecture principles.
+A command-line tool for generating CRUD resource scaffolding for **Go Fiber**, **Gin** and **Echo** web frameworks. gogen automates the creation of controllers, services, repositories, and routes, following clean architecture principles.
 
 ## Features
 
-- Generates complete CRUD resource structure for **Go Fiber** and **Gin**
+- Generates complete CRUD resource structure for **Go Fiber**, **Gin** and **Echo**
 - Produces controller, service, repository, and route files
 - Supports custom output directory
 - Minimal dependencies, fast execution
